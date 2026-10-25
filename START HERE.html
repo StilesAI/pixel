@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pixel Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root { --ink:#0b0b0d; --dim:#6b6b72; --rule:#0b0b0d; --soft:#e6e6e8; --bg:#ffffff; --acc:#1f3dff; }
+* { box-sizing:border-box; margin:0; padding:0; border-radius:0; }
+body { background:var(--bg); color:var(--ink); font:400 17px/1.5 "Inter Tight", system-ui, sans-serif; }
+.mono { font-family:"JetBrains Mono", ui-monospace, monospace; font-weight:500; font-size:12px; letter-spacing:.04em; text-transform:uppercase; }
+.wrap { max-width:780px; margin:0 auto; padding:48px 16px 96px; }
+header .mono { color:var(--dim); }
+h1 { font-weight:800; font-size:clamp(56px, 12vw, 112px); line-height:.9; letter-spacing:-.035em; margin:14px 0 18px; }
+.lede { font-size:20px; max-width:560px; }
+h2 { font-weight:800; font-size:32px; letter-spacing:-.02em; margin:0 0 20px; }
+.block { border-top:1px solid var(--rule); padding-top:20px; margin-top:56px; }
+.block > .mono { display:block; color:var(--dim); margin-bottom:10px; }
+figure { margin-top:32px; }
+figure video, figure img { display:block; width:100%; border:1px solid var(--rule); image-rendering:pixelated; background:#05071a; }
+figcaption { margin-top:8px; color:var(--dim); }
+.step { border-top:1px solid var(--soft); padding:24px 0; }
+.step:first-of-type { border-top:0; padding-top:0; }
+.step-head { display:flex; gap:14px; align-items:baseline; }
+.num { color:var(--acc); }
+h3 { font-weight:800; font-size:24px; letter-spacing:-.01em; }
+dl { display:grid; grid-template-columns:150px 1fr; gap:6px 16px; margin:14px 0 16px; }
+dt { color:var(--dim); padding-top:3px; }
+.prompt { border:1px solid var(--rule); }
+.prompt pre { font:500 13px/1.6 "JetBrains Mono", ui-monospace, monospace; white-space:pre-wrap; padding:16px; max-height:260px; overflow:auto; }
+.copy { display:block; width:100%; border:0; border-top:1px solid var(--rule); background:var(--ink); color:#fff; padding:12px 16px; text-align:left; cursor:pointer; }
+.copy:hover, .copy.done { background:var(--acc); }
+.grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+.grid figure { margin:0; }
+.grid figcaption b { color:var(--ink); font-weight:500; }
+ul.plain { list-style:none; }
+ul.plain li { border-top:1px solid var(--soft); padding:10px 0; display:grid; grid-template-columns:200px 1fr; gap:16px; }
+ul.plain li:first-child { border-top:0; }
+code { font:500 14px "JetBrains Mono", ui-monospace, monospace; }
+footer { margin-top:64px; border-top:1px solid var(--rule); padding-top:16px; color:var(--dim); }
+@media (max-width:640px) {
+  .grid { grid-template-columns:repeat(2, 1fr); }
+  dl { grid-template-columns:1fr; gap:2px; }
+  dd { margin-bottom:8px; }
+  ul.plain li { grid-template-columns:1fr; gap:2px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="mono">Pixel Kit / v1.0</span>
+    <h1>Pixel Kit</h1>
+    <p class="lede">Pixel art animations made by Claude Code and rendered to sharp video. Every frame is drawn in code with a real palette, so nothing is blurry and every scene recolors in one command.</p>
+  </header>
+
+  <figure>
+    <video src="assets/preview/booster_catch.mp4" autoplay muted loop playsinline poster="assets/preview/booster_catch.png"></video>
+    <figcaption class="mono">Fig. 01 / Booster catch / 8.5 s / night palette</figcaption>
+  </figure>
+
+  <div class="block">
+    <span class="mono">Steps</span>
+    <h2>Paste these into Claude Code</h2>
+    
+  <section class="step">
+    <div class="step-head"><span class="mono num">01</span><h3>Install</h3></div>
+    <dl>
+      <dt class="mono">What this does</dt><dd>Finds the kit in your Downloads, copies it to your home folder, sets up Python in its own environment, installs the Claude skill, and renders the example to prove it works. Claude asks before installing anything outside the kit.</dd>
+      <dt class="mono">You get</dt><dd>A working Pixel Kit at ~/pixel-kit and the pixel-kit skill in Claude Code.</dd>
+    </dl>
+    <div class="prompt">
+      <pre>Set up Pixel Kit on this computer. I downloaded and unzipped it; find the folder named pixel-kit (check Downloads and Desktop first) that contains a pixelkit folder and requirements.txt.
+
+Do these steps in order, and ask me before installing anything outside that folder:
+1. Check that Python 3.9 or newer is installed (python3 --version, or py --version on Windows). If it is missing, tell me how to install it and stop.
+2. Copy the kit to ~/pixel-kit (on Windows %USERPROFILE%\pixel-kit). If ~/pixel-kit already exists, ask me before replacing anything, and never overwrite its scenes or out folders.
+3. Create a virtual environment at ~/pixel-kit/.venv and install requirements.txt into it.
+4. Install the skill by copying ~/pixel-kit/skill/pixel-kit to ~/.claude/skills/pixel-kit.
+5. Run the install check from ~/pixel-kit: .venv/bin/python -m pixelkit doctor (Windows: .venv\Scripts\python -m pixelkit doctor).
+6. Render the example as a test: .venv/bin/python -m pixelkit render examples/booster_catch.py, then open out/booster_catch.mp4 for me.
+7. Tell me in a short list what you installed and where.</pre>
+      <button class="copy mono" type="button">Copy prompt</button>
+    </div>
+  </section>
+  <section class="step">
+    <div class="step-head"><span class="mono num">02</span><h3>Make your first one</h3></div>
+    <dl>
+      <dt class="mono">What this does</dt><dd>Claude writes a short beat sheet, starts from the closest template, draws the scene in code, and checks a contact sheet of frames before rendering.</dd>
+      <dt class="mono">You get</dt><dd>An MP4 in ~/pixel-kit/out, 1080 px wide.</dd>
+    </dl>
+    <div class="prompt">
+      <pre>Use the pixel-kit skill to make a pixel animation of [what happens, e.g. &quot;a hot air balloon rising out of a valley at sunrise while an altitude readout counts up&quot;].
+Format 4:5, about 8 seconds. Show me the contact sheet before you render the video.</pre>
+      <button class="copy mono" type="button">Copy prompt</button>
+    </div>
+  </section>
+  <section class="step">
+    <div class="step-head"><span class="mono num">03</span><h3>Change the colors</h3></div>
+    <dl>
+      <dt class="mono">What this does</dt><dd>Renders the same scene in other color modes so you can compare them side by side.</dd>
+      <dt class="mono">You get</dt><dd>The same animation in a preset palette, one hue, and black and white.</dd>
+    </dl>
+    <div class="prompt">
+      <pre>Render scenes/[name].py in these color versions: the dusk palette, one hue of #1f3dff, and black and white. Put them side by side in a contact sheet so I can compare, then render the one I pick.</pre>
+      <button class="copy mono" type="button">Copy prompt</button>
+    </div>
+  </section>
+  <section class="step">
+    <div class="step-head"><span class="mono num">04</span><h3>Edit</h3></div>
+    <dl>
+      <dt class="mono">What this does</dt><dd>Changes timing, numbers, and labels in place, then shows you the frames again.</dd>
+      <dt class="mono">You get</dt><dd>A revised render without starting over.</dd>
+    </dl>
+    <div class="prompt">
+      <pre>In scenes/[name].py: make the [thing] slower, start the readout at [number], and change the label to [text]. Show me the sheet again.</pre>
+      <button class="copy mono" type="button">Copy prompt</button>
+    </div>
+  </section>
+  <section class="step">
+    <div class="step-head"><span class="mono num">05</span><h3>Make it yours</h3></div>
+    <dl>
+      <dt class="mono">What this does</dt><dd>Pulls every value you would change into labeled constants so the scene becomes a reusable template.</dd>
+      <dt class="mono">You get</dt><dd>Your own template in ~/pixel-kit/templates.</dd>
+    </dl>
+    <div class="prompt">
+      <pre>Turn scenes/[name].py into a template I can reuse: pull every value I would change (subject, numbers, labels, timing) into constants at the top with a comment on each, and save it to templates/[name].py.</pre>
+      <button class="copy mono" type="button">Copy prompt</button>
+    </div>
+  </section>
+  </div>
+
+  <div class="block">
+    <span class="mono">Projects, assets and templates</span>
+    <h2>Start from one of these</h2>
+    <div class="grid"><figure><img src="assets/preview/measure.png" alt="Measure template"><figcaption class="mono"><b>MEASURE</b><br>Subject builds up while a readout measures it</figcaption></figure><figure><img src="assets/preview/chart.png" alt="Chart template"><figcaption class="mono"><b>CHART</b><br>Bars grow, peak called out, total lands</figcaption></figure><figure><img src="assets/preview/dominoes.png" alt="Dominoes template"><figcaption class="mono"><b>DOMINOES</b><br>One push, a chain reaction, a counter</figcaption></figure><figure><img src="assets/preview/desk.png" alt="Desk template"><figcaption class="mono"><b>DESK</b><br>Character scene, rain, city window</figcaption></figure><figure><img src="assets/preview/forest.png" alt="Forest template"><figcaption class="mono"><b>FOREST</b><br>Parallax loop, fireflies, a creature</figcaption></figure><figure><img src="assets/preview/booster_catch.png" alt="Example template"><figcaption class="mono"><b>EXAMPLE</b><br>Booster catch, the full showpiece</figcaption></figure></div>
+  </div>
+
+  <div class="block">
+    <span class="mono">Colors</span>
+    <h2>Any scene, any colors</h2>
+    <ul class="plain">
+      <li><span class="mono">Multicolour</span><span>Five palettes: night, dusk, ember, harbor, paper.</span></li>
+      <li><span class="mono">One hue</span><span>Any hex, built into a shaded ramp. <code>--hue "#1f3dff"</code></span></li>
+      <li><span class="mono">Black and white</span><span>Grayscale with the same shading. <code>--mono</code></span></li>
+      <li><span class="mono">Your own</span><span>A few colors as anchors, or a full 10+ color palette mapped slot by slot.</span></li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <span class="mono">In the folder</span>
+    <h2>What you get</h2>
+    <ul class="plain">
+      <li><span class="mono">pixelkit/</span><span>The render engine: canvas, shading, lighting, particles, smoke, fonts, UI readouts, video export.</span></li>
+      <li><span class="mono">skill/pixel-kit/</span><span>The Claude skill: workflow, art rules, review checklist, full API reference.</span></li>
+      <li><span class="mono">templates/</span><span>Six starting scenes.</span></li>
+      <li><span class="mono">examples/</span><span>The booster catch, to learn from.</span></li>
+      <li><span class="mono">assets/sprites/</span><span>Robot, cat, person with a walk cycle, bird, coin, heart. Plus 20 drawn props: trees, mountains, skylines, lamps, water.</span></li>
+    </ul>
+  </div>
+
+  <footer class="mono">Needs Claude Code and Python 3.9+. macOS, Windows, Linux.</footer>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var text = btn.parentElement.querySelector('pre').innerText;
+    function done() { btn.textContent = 'Copied'; btn.classList.add('done');
+      setTimeout(function () { btn.textContent = 'Copy prompt'; btn.classList.remove('done'); }, 1600); }
+    function fallback() { var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+      ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(ta); }
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(done, fallback); }
+    else { fallback(); }
+  });
+});
+</script>
+</body>
+</html>

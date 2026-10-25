@@ -1,0 +1,25 @@
+# heart, 2-frame beat
+legend:
+  . clear
+  o main.0
+  m warm.0
+  h warm.1
+  w warm.3
+frame:
+.........
+..oo.oo..
+.owhohho.
+.ohhhhmo.
+..ohhmo..
+...omo...
+....o....
+.........
+frame:
+.oo...oo.
+owwhohhho
+ohhhhhhmo
+ohhhhhhmo
+.ohhhhmo.
+..ohhmo..
+...omo...
+....o....

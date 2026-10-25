@@ -1,0 +1,99 @@
+# person: idle, then a 4-frame walk cycle (frames 1-4)
+legend:
+  . clear
+  o main.0
+  k alt.0
+  h alt.1
+  s skin.1
+  S skin.2
+  d skin.0
+  c acc.1
+  C acc.2
+  p main.1
+  P main.2
+  b alt.0
+frame:
+...oooo...
+..ohhhhho.
+..ohhhhho.
+..oSSSsho.
+..oSoSosd.
+..oSSSSso.
+...osssdo.
+..ooccCoo.
+.ocCcCCcco
+.osocCCcos
+.osocCccos
+.oooppppoo
+...oPPpo..
+...opopo..
+...opopo..
+..obbobbo.
+frame:
+...oooo...
+..ohhhhho.
+..ohhhhho.
+..oSSSsho.
+..oSoSosd.
+..oSSSSso.
+...osssdo.
+..ooccCoo.
+.ocCcCCco.
+.osocCCco.
+..socCcco.
+...oppppo.
+..oPPopPo.
+..opo.opo.
+.opo...opo
+obbo...obbo
+frame:
+...oooo...
+..ohhhhho.
+..ohhhhho.
+..oSSSsho.
+..oSoSosd.
+..oSSSSso.
+...osssdo.
+..ooccCoo.
+..occCCco.
+..osCCcso.
+..oscCcso.
+...oppppo.
+...oPPpo..
+...opPo...
+...oppo...
+..obbbo...
+frame:
+...oooo...
+..ohhhhho.
+..ohhhhho.
+..oSSSsho.
+..oSoSosd.
+..oSSSSso.
+...osssdo.
+..ooccCoo.
+.ocCcCCco.
+.osocCCco.
+..socCcco.
+...oppppo.
+..oPpoPPo.
+..opo.opo.
+.opo...opo
+obbo...obbo
+frame:
+...oooo...
+..ohhhhho.
+..ohhhhho.
+..oSSSsho.
+..oSoSosd.
+..oSSSSso.
+...osssdo.
+..ooccCoo.
+..occCCco.
+..osCCcso.
+..oscCcso.
+...oppppo.
+....oPPo..
+....oPpo..
+....oppo..
+....obbbo.

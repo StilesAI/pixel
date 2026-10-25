@@ -1,0 +1,43 @@
+# spinning coin, 4 frames
+legend:
+  . clear
+  o warm.0
+  m warm.1
+  h warm.2
+  w warm.3
+frame:
+..oooo..
+.owwhho.
+owwhhhmo
+owhhmhmo
+owhhmhmo
+ohhhhhmo
+.ohhmmo.
+..oooo..
+frame:
+...ooo..
+..owhho.
+..owhmo.
+..owhmo.
+..owhmo.
+..ohhmo.
+..ohmmo.
+...ooo..
+frame:
+....oo..
+....wo..
+....ho..
+....ho..
+....ho..
+....ho..
+....mo..
+....oo..
+frame:
+..ooo...
+.ohhwo..
+.omhwo..
+.omhwo..
+.omhwo..
+.omhho..
+.ommho..
+..ooo...

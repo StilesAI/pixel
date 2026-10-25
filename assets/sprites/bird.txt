@@ -1,0 +1,19 @@
+# small bird in flight, 2-frame flap. Recolor with Canvas.recolor()
+legend:
+  . clear
+  o main.0
+  m main.2
+frame:
+o.......o
+mo.....om
+.mo...om.
+..mo.om..
+...ooo...
+....m....
+frame:
+.........
+.........
+...ooo...
+..mo.om..
+.mo...om.
+mo.....om
