@@ -17,6 +17,7 @@ Open `START HERE.html` for the setup steps and copy-paste prompts.
 | `palettes/` | night, dusk, ember, harbor, paper |
 | `assets/sprites/` | robot, cat, person (with walk cycle), bird, coin, heart |
 | `PROMPTS.md` | the install prompt and starter prompts |
+| `tools/`, `fx/`, `pk` | `pk fx`: pixel effects pinned to your hand in real video |
 
 ## Color modes
 
@@ -45,3 +46,39 @@ From the kit folder, with its virtual environment:
 ```
 
 On Windows use `.venv\Scripts\python` in place of `.venv/bin/python`.
+
+## Hand-tracked effects (pk fx)
+
+Put a pixel effect on a real video, pinned to your hand, in one command:
+
+```
+./pk fx aurora-ribbon --take take.mov --joint right_wrist --seconds 5 --debug   # try 5 seconds first
+./pk fx aurora-ribbon --take take.mov --joint right_wrist                       # the whole take
+./pk fx aurora-ribbon --take take.mov --joint right_wrist --palette blue         # recolor it
+./pk fx fire/spirit-flame --take take.mov --joint right_wrist                    # any pixelfx effect
+```
+
+1. A free pose model from Google (MediaPipe Pose Landmarker) finds your wrist in every frame, smoothed so it
+   doesn't jitter. `--debug` also writes the track as a video with a dot on your wrist.
+2. The effect is drawn along your hand's recent path in hard square pixels, so it trails behind your hand,
+   and kept off your face.
+3. It's composited onto the take with ffmpeg, its glow added on top. Out comes an MP4 with your audio.
+
+Selfie video from the front camera is usually mirrored: if the effect lands on the wrong hand, add `--mirrored`.
+Switch colors partway through with `--palette-at "20.1:blue,22.3:aurora"` (seconds into the take). Run
+`./pk fx --help` for the rest (trail length, how far down the arm it reaches, glow, pixel size).
+
+**Effects.** `aurora-ribbon` is in this kit (`fx/`). Every other effect id comes from
+[pixelfx](https://github.com/patch-gg/pixelfx) by Patch (MIT, method by Hugo Duprez), 244 pixel art effects:
+clone it next to this folder, so you have `pixelfx/` and this kit side by side (or pass `--pixelfx PATH`). Nothing
+from pixelfx is copied in here, and `aurora-ribbon` draws with pixelfx's core too, so you need the clone either way.
+When you post, credit them: "pixelfx by Patch, method by Hugo Duprez".
+
+**Needs**, on top of the kit's requirements: Node.js 18 or newer, ffmpeg on your PATH, and
+
+```
+.venv/bin/python -m pip install -r requirements-fx.txt
+```
+
+The pose model (about 9 MB) downloads into `models/` on first run. On Windows, run
+`.venv\Scripts\python -m pixelkit fx ...` in place of `./pk fx ...`.

@@ -13,6 +13,7 @@
   python -m pixelkit palettes                             -> out/palettes.png
   python -m pixelkit sprites                              -> out/sprites.png
   python -m pixelkit doctor                               -> check the install
+  pk fx aurora-ribbon --take take.mov --joint right_wrist   -> a pixelfx effect pinned to your hand
 """
 from __future__ import annotations
 
@@ -178,6 +179,13 @@ def main(argv=None):
     sp.add_argument("--out")
     sp.add_argument("--palette")
     sp.set_defaults(fn=cmd_sprites)
+
+    try:
+        sys.path.insert(0, str(ROOT / "tools"))
+        import pk_fx
+        pk_fx.add_parser(sub)
+    except ImportError:
+        pass
 
     d = sub.add_parser("doctor")
     d.set_defaults(fn=cmd_doctor)

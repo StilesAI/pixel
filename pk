@@ -1,0 +1,6 @@
+#!/bin/sh
+# Pixel Kit command line: ./pk render ..., ./pk fx ..., ./pk doctor
+DIR="$(cd "$(dirname "$0")" && pwd)"
+PY="$DIR/.venv/bin/python"
+[ -x "$PY" ] || PY=python3
+PYTHONPATH="$DIR${PYTHONPATH:+:$PYTHONPATH}" exec "$PY" -m pixelkit "$@"
