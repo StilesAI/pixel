@@ -210,11 +210,13 @@ async function followPath(o, { core, mod, meta, track, frame, W, H, K, VW, sched
   const { C, L, write, finish } = encoders(o, W, H, K, track);
   const colorBuf = Buffer.alloc(W * H * 4), lightBuf = Buffer.alloc(W * H * 4);
   const hist = [];
-  let t = 0, boost = 0, cur = sched[0], arm = null, act = 0;
+  let t = 0, boost = 0, cur = sched[0], arm = null, act = 0, gap = false;
   for (const f of track.frames) {
     const now = f.t, want = rampAt((track.start ?? 0) + f.t);
     if (want !== cur) { cur = want; boost = 1; }
-    if (f.lost) hist.length = 0;
+    // a lost hand (out of frame, hidden) adds nothing: the trail it left keeps fading out instead of vanishing,
+    // and when the hand comes back its new trail starts fresh rather than joining up across the gap
+    if (f.lost) gap = true;
     else {
       const g = Math.max(smooth(0.04, 0.8, f.speed / VW), 0.6 * boost);
       // activity: up at once when the hand moves, down over ~0.8 s once it rests, so a still hand goes dark
@@ -232,12 +234,17 @@ async function followPath(o, { core, mod, meta, track, frame, W, H, K, VW, sched
         const el = Math.hypot(arm.ex, arm.ey) || 1;
         ax = arm.ex / el; ay = arm.ey / el; len = Math.max(40, el * o.pathArm);
       }
-      hist.unshift({ t: now, x, y, ax, ay, len, k: (0.45 + 0.55 * g) * act, pal: sched.indexOf(cur) });
+      hist.unshift({ t: now, x, y, ax, ay, len, k: (0.45 + 0.55 * g) * act, pal: sched.indexOf(cur), brk: gap && hist.length > 0 });
+      gap = false;
     }
     while (hist.length && now - hist[hist.length - 1].t > life) hist.pop();
     // rays square to the path (a curtain hanging off it), turned to the arm side, eased with the arm direction
     for (let i = 0; i < hist.length; i++) {
-      const h = hist[i], a = hist[Math.max(0, i - 3)], b = hist[Math.min(hist.length - 1, i + 3)];
+      // neighbours for the path direction, without reaching across a gap (h.brk: no line from h to the next older)
+      let ia = i, ib = i;
+      while (ia > i - 3 && ia > 0 && !hist[ia - 1].brk) ia--;
+      while (ib < i + 3 && ib < hist.length - 1 && !hist[ib].brk) ib++;
+      const h = hist[i], a = hist[ia], b = hist[ib];
       h.age = (now - h.t) / life;
       let tx = b.x - a.x, ty = b.y - a.y;
       const tl = Math.hypot(tx, ty);

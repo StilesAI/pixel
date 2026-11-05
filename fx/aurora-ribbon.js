@@ -5,7 +5,8 @@
 // Hugo Duprez.
 //
 // o.path: [{ x, y, age (0 newest..1 oldest), k (strength 0..1), dx, dy (ray direction, unit), len (ray length),
-// pal (index into o.ramps) }] in local pixels. Without a path it draws its own swaying S so it can be previewed.
+// pal (index into o.ramps), brk (true: no ribbon from here to the next point) }] in local pixels. Without a path it
+// draws its own swaying S so it can be previewed.
 //
 // A Pixel Kit effect, not part of pixelfx: tools/fx_follow.mjs loads it and hands it pixelfx's core (from your
 // pixelfx clone) as the fourth argument to draw, so it paints with the same painter and colors as the pixelfx effects.
@@ -111,6 +112,7 @@ export function draw(p, t, o, core) {
   const S = o.seed;
   for (let i = 0; i < path.length - 1; i++) {
     const A = path[i], B = path[i + 1];
+    if (A.brk) continue; // the hand was lost between these two: no ribbon across the gap
     const ax = p.toX(A.x, A.y) - p.ox, ay = p.toY(A.x, A.y) - p.oy, bx = p.toX(B.x, B.y) - p.ox, by = p.toY(B.x, B.y) - p.oy;
     const seg = Math.hypot(bx - ax, by - ay), n = Math.max(1, Math.ceil(seg * 1.5));
     for (let j = 0; j < n; j++) {
